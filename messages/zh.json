@@ -1,0 +1,24 @@
+{
+  "HomePage": {
+    "title": "首页",
+    "welcome": "欢迎使用 Next.js 模版"
+  },
+  "WebSocket": {
+    "title": "WebSocket 示例",
+    "status": "连接状态",
+    "connected": "已连接",
+    "disconnected": "未连接",
+    "disconnect": "断开连接",
+    "reconnect": "重新连接",
+    "messageLabel": "消息",
+    "send": "发送",
+    "received": "接收到的消息",
+    "placeholder": "请输入消息"
+  },
+  "LoginPage": {
+    "title": "登录",
+    "submit": "登录",
+    "username": "用户名",
+    "password": "密码"
+  }
+}

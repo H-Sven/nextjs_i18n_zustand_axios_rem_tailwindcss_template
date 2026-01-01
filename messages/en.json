@@ -1,0 +1,24 @@
+{
+  "HomePage": {
+    "title": "Home Page",
+    "welcome": "Welcome to Next.js Template"
+  },
+  "WebSocket": {
+    "title": "WebSocket Example",
+    "status": "Connection Status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "disconnect": "Disconnect",
+    "reconnect": "Reconnect",
+    "messageLabel": "Message",
+    "send": "Send",
+    "received": "Received Messages",
+    "placeholder": "Enter message"
+  },
+  "LoginPage": {
+    "title": "Login",
+    "submit": "Sign In",
+    "username": "Username",
+    "password": "Password"
+  }
+}
