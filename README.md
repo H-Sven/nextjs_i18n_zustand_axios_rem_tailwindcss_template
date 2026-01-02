@@ -193,6 +193,30 @@ node .next/standalone/server.js
 
 ### 3. 服务器部署
 
+#### 自动化部署脚本 (推荐)
+
+项目根目录下提供了 `deploy.sh` 脚本，可一键完成构建、上传和重启。
+
+1.  **配置脚本**: 编辑 `deploy.sh`，修改服务器信息：
+    ```bash
+    SERVER_USER="root"
+    SERVER_IP="your.server.ip.address"
+    SERVER_DIR="/var/www/next-app"
+    ```
+2.  **运行部署**:
+
+    ```bash
+    # 部署到测试环境
+    ./deploy.sh test
+
+    # 部署到生产环境
+    ./deploy.sh prod
+    ```
+
+#### 手动部署
+
+如果需要手动操作，请参考以下步骤：
+
 1.  **上传文件**：将 `.next/standalone/` 目录下的**所有内容**上传到服务器的目标目录。
 2.  **启动服务**：进入服务器上的目标目录，可以选择以下方式启动：
 
