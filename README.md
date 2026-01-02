@@ -7,7 +7,7 @@
 - **框架**: [Next.js 15](https://nextjs.org/) (App Router)
 - **语言**: [TypeScript](https://www.typescriptlang.org/)
 - **样式**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **UI 组件**: [shadcn/ui](https://ui.shadcn.com/)
+- **UI 组件**: [shadcn/ui](https://ui.shadcn.com/) (图标: [Lucide React](https://lucide.dev/icons/))
 - **状态管理**: [Zustand](https://github.com/pmndrs/zustand) (支持持久化)
 - **国际化**: [next-intl](https://next-intl-docs.vercel.app/)
 - **网络请求**: [Axios](https://axios-http.com/)
