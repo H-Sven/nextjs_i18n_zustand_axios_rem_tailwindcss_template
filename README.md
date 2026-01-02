@@ -4,7 +4,7 @@
 
 ## 🚀 技术栈
 
-- **框架**: [Next.js 15](https://nextjs.org/) (App Router)
+- **框架**: [Next.js 16](https://nextjs.org/) (App Router)
 - **语言**: [TypeScript](https://www.typescriptlang.org/)
 - **样式**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **UI 组件**: [shadcn/ui](https://ui.shadcn.com/) (图标: [Lucide React](https://lucide.dev/icons/))
@@ -44,7 +44,7 @@
 
 - **Tailwind CSS v4**: 最新版配置，支持 CSS 变量。
 - **Shadcn UI**: 已集成基础组件（Button, Input 等）。
-- **移动端适配**: 内置 REM 适配方案 (`src/components/RemScript.tsx`)，默认设计稿宽 375px (1rem = 100px)。
+- **移动端适配**: 自动转换 `px` 为 `rem`
 
 ### 4. 实用工具
 
@@ -71,32 +71,43 @@
 ```
 .
 ├── messages/              # 国际化翻译文件 (zh.json, en.json)
-├── public/                # 静态资源
+├── public/                # 静态资源 (svg, images)
 ├── src/
 │   ├── api/               # API 接口定义
+│   │   └── user.ts        # 用户相关 API
 │   ├── app/               # 页面路由 (App Router)
-│   ├── [locale]/      # 国际化路由入口
-│   │   │   ├── login/     # 登录页
-│   │   │   ├── websocket/ # WebSocket 示例页
+│   │   ├── [locale]/      # 国际化动态路由
+│   │   │   ├── login/     # 登录页面
+│   │   │   ├── websocket/ # WebSocket 示例页面
+│   │   │   ├── layout.tsx # 根布局 (包含 i18n Provider)
 │   │   │   └── page.tsx   # 首页
-│   │   └── globals.css    # 全局样式
-│   ├── components/        # 组件
-│   │   ├── ui/            # Shadcn UI 组件
-│   │   └── RemScript.tsx  # Rem 适配脚本
-│   ├── hooks/             # 自定义 Hooks (useWebSocket 等)
+│   │   ├── favicon.ico    # 网站图标
+│   │   └── globals.css    # 全局样式 (Tailwind 引入)
+│   ├── components/        # 公共组件
+│   │   ├── ui/            # UI 基础组件 (Button, Input 等)
+│   ├── hooks/             # 自定义 Hooks
+│   │   └── useWebSocket.ts # WebSocket 封装 Hook
 │   ├── i18n/              # 国际化配置
-│   ├── lib/               # 工具函数 (request, dayjs, eventBus, utils)
+│   │   ├── request.ts     # next-intl 请求配置
+│   │   └── routing.ts     # 路由配置
+│   ├── lib/               # 工具函数库
+│   │   ├── dayjs.ts       # Day.js 配置
+│   │   ├── eventBus.ts    # 事件总线
+│   │   ├── request.ts     # Axios 请求封装
+│   │   └── utils.ts       # 通用工具函数 (cn 等)
 │   ├── store/             # Zustand 状态管理
+│   │   ├── appStore.ts    # 应用级状态 (如语言设置)
+│   │   └── userStore.ts   # 用户状态
 │   ├── types/             # TypeScript 类型定义
-│   └── middleware.ts      # Next.js 中间件
-├── middleware.ts      # Next.js 中间件
+│   └── middleware.ts      # 中间件 (处理国际化路由重定向)
 ├── .env.development       # 开发环境变量
 ├── .env.production        # 生产环境变量
 ├── .env.test              # 测试环境变量
-├── .husky/                # Git Hooks
+├── .husky/                # Git Hooks 配置
 ├── eslint.config.mjs      # ESLint 配置
 ├── next.config.ts         # Next.js 配置
-└── package.json
+├── package.json           # 项目依赖与脚本
+└── postcss.config.mjs     # PostCSS 配置
 ```
 
 ## 🛠️ 快速开始
