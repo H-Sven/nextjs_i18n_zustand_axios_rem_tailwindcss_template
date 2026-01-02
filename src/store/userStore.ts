@@ -1,12 +1,12 @@
-import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface UserState {
-  token: string | null
-  userInfo: any | null
-  setToken: (token: string) => void
-  setUserInfo: (info: any) => void
-  logout: () => void
+  token: string | null;
+  userInfo: any | null;
+  setToken: (token: string) => void;
+  setUserInfo: (info: any) => void;
+  logout: () => void;
 }
 
 /**
@@ -27,4 +27,4 @@ export const useUserStore = create<UserState>()(
       storage: createJSONStorage(() => localStorage), // 默认使用 localStorage
     },
   ),
-)
+);

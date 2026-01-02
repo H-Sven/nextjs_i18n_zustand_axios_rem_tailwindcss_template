@@ -1,30 +1,30 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl';
 
-import { useRouter } from '@/i18n/routing'
-import { useUserStore } from '@/store/userStore'
+import { useRouter } from '@/i18n/routing';
+import { useUserStore } from '@/store/userStore';
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function LoginPage() {
-  const t = useTranslations('LoginPage')
-  const router = useRouter()
-  const setToken = useUserStore((state) => state.setToken)
-  const setUserInfo = useUserStore((state) => state.setUserInfo)
+  const t = useTranslations('LoginPage');
+  const router = useRouter();
+  const setToken = useUserStore((state) => state.setToken);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     // 模拟登录
-    setToken('fake-token-123')
-    setUserInfo({ name: username })
-    router.push('/')
-  }
+    setToken('fake-token-123');
+    setUserInfo({ name: username });
+    router.push('/');
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -60,5 +60,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

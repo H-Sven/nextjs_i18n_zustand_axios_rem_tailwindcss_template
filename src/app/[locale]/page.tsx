@@ -1,33 +1,33 @@
-'use client'
+'use client';
 
-import { useEffect, useTransition } from 'react'
+import { useEffect, useTransition } from 'react';
 
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl';
 
-import { Link, usePathname, useRouter } from '@/i18n/routing'
-import { useAppStore } from '@/store/appStore'
+import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { useAppStore } from '@/store/appStore';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 
 export default function HomePage() {
-  const t = useTranslations('HomePage')
-  const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
-  const [isPending, startTransition] = useTransition()
-  const { setLocale } = useAppStore()
+  const t = useTranslations('HomePage');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+  const { setLocale } = useAppStore();
 
   // 同步当前语言到 store
   useEffect(() => {
-    setLocale(locale as any)
-  }, [locale, setLocale])
+    setLocale(locale as any);
+  }, [locale, setLocale]);
 
   const handleSwitchLocale = (nextLocale: string) => {
     startTransition(() => {
-      setLocale(nextLocale as any)
-      router.replace(pathname, { locale: nextLocale })
-    })
-  }
+      setLocale(nextLocale as any);
+      router.replace(pathname, { locale: nextLocale });
+    });
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-24">
@@ -52,5 +52,5 @@ export default function HomePage() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

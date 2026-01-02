@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import Script from 'next/script'
+import Script from 'next/script';
 
 /**
  * 移动端适配 REM 脚本
@@ -24,5 +24,5 @@ export default function RemScript() {
         })();
       `}
     </Script>
-  )
+  );
 }

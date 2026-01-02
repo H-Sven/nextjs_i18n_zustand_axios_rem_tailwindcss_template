@@ -1,13 +1,13 @@
-import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-import { routing } from '@/i18n/routing'
+import { routing } from '@/i18n/routing';
 
-type Locale = (typeof routing.locales)[number]
+type Locale = (typeof routing.locales)[number];
 
 interface AppState {
-  locale: Locale
-  setLocale: (locale: Locale) => void
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
 }
 
 /**
@@ -25,4 +25,4 @@ export const useAppStore = create<AppState>()(
       storage: createJSONStorage(() => localStorage),
     },
   ),
-)
+);

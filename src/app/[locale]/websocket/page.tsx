@@ -1,27 +1,27 @@
-'use client'
+'use client';
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react';
 
-import { useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl';
 
-import { formatDateTime } from '@/lib/dayjs'
+import { formatDateTime } from '@/lib/dayjs';
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
-import { useWebSocket } from '@/hooks/useWebSocket'
+import { useWebSocket } from '@/hooks/useWebSocket';
 
 interface Message {
-  id: number
-  content: string
-  time: string
-  type: 'sent' | 'received'
+  id: number;
+  content: string;
+  time: string;
+  type: 'sent' | 'received';
 }
 
 export default function WebSocketPage() {
-  const t = useTranslations('WebSocket')
-  const [messages, setMessages] = useState<Message[]>([])
-  const [inputValue, setInputValue] = useState('')
+  const t = useTranslations('WebSocket');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
 
   const handleMessage = useCallback((data: any) => {
     setMessages((prev) => [
@@ -32,8 +32,8 @@ export default function WebSocketPage() {
         time: formatDateTime(new Date()),
         type: 'received',
       },
-    ])
-  }, [])
+    ]);
+  }, []);
 
   const { sendMessage, isConnected, disconnect, reconnect } = useWebSocket({
     url: 'wss://echo.websocket.org', // 公共测试服务
@@ -41,12 +41,12 @@ export default function WebSocketPage() {
     reconnectInterval: 3000,
     heartbeatInterval: 5000, // 为了演示效果，缩短心跳间隔
     heartbeatMessage: 'heartbeat',
-  })
+  });
 
   const handleSend = () => {
-    if (!inputValue.trim()) return
+    if (!inputValue.trim()) return;
 
-    sendMessage(inputValue)
+    sendMessage(inputValue);
     setMessages((prev) => [
       ...prev,
       {
@@ -55,9 +55,9 @@ export default function WebSocketPage() {
         time: formatDateTime(new Date()),
         type: 'sent',
       },
-    ])
-    setInputValue('')
-  }
+    ]);
+    setInputValue('');
+  };
 
   return (
     <div className="container mx-auto max-w-2xl p-8">
@@ -124,5 +124,5 @@ export default function WebSocketPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
