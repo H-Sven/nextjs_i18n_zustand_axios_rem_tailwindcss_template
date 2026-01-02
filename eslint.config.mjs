@@ -95,7 +95,7 @@ const eslintConfig = defineConfig([
       ],
 
       // 分号规则
-      'semi': ['error', 'always'],
+      'semi': 'off',
       'semi-spacing': ['error', { before: false, after: true }],
 
       // 引号规则
