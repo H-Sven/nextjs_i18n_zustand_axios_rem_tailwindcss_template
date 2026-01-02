@@ -169,7 +169,14 @@ pnpm build
 执行构建命令会自动完成打包和静态资源整合：
 
 ```bash
-pnpm build
+# 构建生产环境
+pnpm build:prod
+
+# 构建预发布环境
+pnpm build:pre
+
+# 构建测试环境
+pnpm build:test
 ```
 
 构建完成后，`.next/standalone` 目录即为完整的部署包（已自动包含 `public` 和 `.next/static` 资源）。
@@ -187,7 +194,21 @@ node .next/standalone/server.js
 ### 3. 服务器部署
 
 1.  **上传文件**：将 `.next/standalone/` 目录下的**所有内容**上传到服务器的目标目录。
-2.  **启动服务**：进入服务器上的目标目录，直接运行：
+2.  **启动服务**：进入服务器上的目标目录，可以选择以下方式启动：
+
+    **方式一：使用 PM2 管理 (生产推荐)**
+
+    本项目已内置 `ecosystem.config.js` 配置文件，支持集群模式和自动重启。
+
+    ```bash
+    # 1. 安装 PM2 (如果尚未安装)
+    npm install -g pm2
+
+    # 2. 启动服务 (自动读取 ecosystem.config.js)
+    pm2 start ecosystem.config.js
+    ```
+
+    **方式二：直接运行**
 
     ```bash
     node server.js
@@ -195,5 +216,7 @@ node .next/standalone/server.js
 
 > **提示**:
 >
-> - `standalone` 模式生成的 `package.json` 不包含原项目的 scripts，所以服务器上通常直接用 `node server.js` 启动。
-> - 依然可以通过环境变量控制端口：`PORT=8080 HOSTNAME=0.0.0.0 node server.js`
+> - `standalone` 模式生成的 `package.json` 不包含原项目的 scripts，所以服务器上通常直接用 `node server.js` 或 PM2 启动。
+> - **环境变量控制** (如修改端口):
+>   - Node: `PORT=8080 HOSTNAME=0.0.0.0 node server.js`
+>   - PM2: 修改 `ecosystem.config.js` 或运行 `PORT=8080 pm2 start ecosystem.config.js`
