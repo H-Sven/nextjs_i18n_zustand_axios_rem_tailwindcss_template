@@ -75,7 +75,7 @@
 ├── src/
 │   ├── api/               # API 接口定义
 │   ├── app/               # 页面路由 (App Router)
-│   │   ├── [locale]/      # 国际化路由入口
+│   ├── [locale]/      # 国际化路由入口
 │   │   │   ├── login/     # 登录页
 │   │   │   ├── websocket/ # WebSocket 示例页
 │   │   │   └── page.tsx   # 首页
@@ -89,6 +89,10 @@
 │   ├── store/             # Zustand 状态管理
 │   ├── types/             # TypeScript 类型定义
 │   └── middleware.ts      # Next.js 中间件
+├── middleware.ts      # Next.js 中间件
+├── .env.development       # 开发环境变量
+├── .env.production        # 生产环境变量
+├── .env.test              # 测试环境变量
 ├── .husky/                # Git Hooks
 ├── eslint.config.mjs      # ESLint 配置
 ├── next.config.ts         # Next.js 配置
@@ -116,18 +120,6 @@ pnpm dev
 
 访问 [http://localhost:3000](http://localhost:3000)。
 
-### 4. 构建生产版本
-
-```bash
-pnpm build
-```
-
-### 5. 启动生产服务
-
-```bash
-pnpm start
-```
-
 ### 6. 代码检查与修复
 
 ```bash
@@ -138,61 +130,68 @@ pnpm lint
 pnpm lint:fix
 ```
 
-## 📖 使用指南
+## 🌍 环境变量
 
-### 切换语言
+项目使用 `.env.*` 文件管理多环境配置。
 
-项目使用 `next-intl`。在页面中：
+### 变量说明
 
-```tsx
-import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/routing'
+| 变量名                | 说明              | 示例                                |
+| :-------------------- | :---------------- | :---------------------------------- |
+| `NEXT_PUBLIC_ENV`     | 当前环境标识      | `development`, `production`, `test` |
+| `NEXT_PUBLIC_API_URL` | 后端 API 接口地址 | `http://localhost:3000/api`         |
 
-export default function Page() {
-  const t = useTranslations('HomePage')
-  return (
-    <div>
-      <h1>{t('title')}</h1>
-      <Link href="/about" locale="en">
-        Switch to English
-      </Link>
-    </div>
-  )
-}
+### 环境文件
+
+- `.env.development`: 开发环境 (`pnpm dev`)
+- `.env.test`: 测试环境 (`pnpm build:test`)
+- `.env.pre`: 预发布环境 (`pnpm build:pre`)
+- `.env.production`: 生产环境 (`pnpm build:prod` 或 `pnpm build`)
+
+构建特定环境版本：
+
+```bash
+# 构建测试环境
+pnpm build:test
+
+# 构建生产环境
+pnpm build
 ```
 
-### 使用 Store (Zustand)
+## 🚢 部署指南
 
-```tsx
-import { useAppStore } from '@/store/appStore'
+本项目已开启 `output: 'standalone'` 模式，并配置了自动化构建脚本。构建后会自动生成完整的独立部署包，无需安装 `node_modules` 即可运行。
 
-// 组件内
-const { locale, setLocale } = useAppStore()
+### 1. 构建项目
+
+执行构建命令会自动完成打包和静态资源整合：
+
+```bash
+pnpm build
 ```
 
-### 发起网络请求
+构建完成后，`.next/standalone` 目录即为完整的部署包（已自动包含 `public` 和 `.next/static` 资源）。
 
-```tsx
-import request from '@/lib/request'
+### 2. 本地预览
 
-// GET
-const data = await request.get('/api/users')
+构建完成后，你可以在本地项目根目录下直接验证构建结果：
 
-// POST
-await request.post('/api/login', { username, password })
+```bash
+pnpm start:standalone
+# 或者
+node .next/standalone/server.js
 ```
 
-### 使用 WebSocket
+### 3. 服务器部署
 
-```tsx
-import { useWebSocket } from '@/hooks/useWebSocket'
+1.  **上传文件**：将 `.next/standalone/` 目录下的**所有内容**上传到服务器的目标目录。
+2.  **启动服务**：进入服务器上的目标目录，直接运行：
 
-const { sendMessage, isConnected, disconnect, reconnect } = useWebSocket({
-  url: 'wss://echo.websocket.org',
-  heartbeatInterval: 5000,
-})
-```
+    ```bash
+    node server.js
+    ```
 
-## 📄 License
-
-MIT
+> **提示**:
+>
+> - `standalone` 模式生成的 `package.json` 不包含原项目的 scripts，所以服务器上通常直接用 `node server.js` 启动。
+> - 依然可以通过环境变量控制端口：`PORT=8080 HOSTNAME=0.0.0.0 node server.js`

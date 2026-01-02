@@ -33,6 +33,7 @@ export default function HomePage() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-24">
       <h1 className="mb-4 text-4xl font-bold">{t('title')}</h1>
       <p className="mb-8">{t('welcome')}</p>
+      <p className="mb-8">{process.env.NEXT_PUBLIC_ENV}</p>
 
       <div className="flex gap-4">
         <Link href="/login">
