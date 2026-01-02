@@ -13,6 +13,7 @@
     "start": "next start",
     "start:standalone": "node .next/standalone/server.js",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -53,6 +54,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "postcss-pxtorem": "^6.1.0",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",

@@ -5,6 +5,7 @@
 ## 🚀 技术栈
 
 - **框架**: [Next.js 16](https://nextjs.org/) (App Router)
+- **核心库**: [React 19](https://react.dev/)
 - **语言**: [TypeScript](https://www.typescriptlang.org/)
 - **样式**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **UI 组件**: [shadcn/ui](https://ui.shadcn.com/) (图标: [Lucide React](https://lucide.dev/icons/))
@@ -130,16 +131,6 @@ pnpm dev
 ```
 
 访问 [http://localhost:3000](http://localhost:3000)。
-
-### 6. 代码检查与修复
-
-```bash
-# 运行 ESLint
-pnpm lint
-
-# 自动修复
-pnpm lint:fix
-```
 
 ## 🌍 环境变量
 

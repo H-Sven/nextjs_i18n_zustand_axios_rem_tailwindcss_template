@@ -95,6 +95,9 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* 忽略 pxtorem 处理的注释示例 */
+/* .ignore { border: 1px solid; } */
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
